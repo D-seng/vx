@@ -113,6 +113,14 @@
       "date": "2019-01-27T04:58:00.000Z",
       "time": "4:00",
       "attendees": []
+    },
+    {
+      "title": "Roast a Duck",
+      "description": "Have fun roasting a duck in the BBQ pit.",
+      "location": "Joe's house.",
+      "date": "2019-01-27T04:58:00.000Z",
+      "time": "4:00",
+      "attendees": []
     }
   ]
 }
