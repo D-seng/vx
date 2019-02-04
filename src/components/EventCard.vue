@@ -1,6 +1,12 @@
 <template>
   <router-link class="event-link" :to="{ name: 'event-show', params: { id: event.id } }">
-    <div class="event-card -shadow">
+    <div
+      class="event-card -shadow"
+      draggable="true"
+      v-on:dragstart="handleDragStart"
+      v-on:dragenter="handleDragEnter"
+      v-on:dragend="handleDragEnd(event.id)"
+    >
       <span class="eyebrow">@{{ event.time }} on {{ event.date }}</span>
       <h4 class="title">{{ event.title }}</h4>
       <BaseIcon name="users">{{ event.attendees.length }} attending</BaseIcon>
@@ -12,6 +18,16 @@
 export default {
   props: {
     event: Object
+  },
+  methods: {
+    handleDragStart() {
+      // alert('start drag')
+    },
+    handleDragEnd(eventId) {
+      // var el = document.findElementById(eventId)
+      let b = document.getElementById('bucket')
+      alert(eventId)
+    }
   }
 }
 </script>

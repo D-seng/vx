@@ -1,11 +1,10 @@
 <template>
   <div>
-    <h1>Create an event, {{ user.name }}</h1>
-    <p>This event was created by {{ user.name }}</p>
-    <ul>
-      <li v-for="category in categories" :key="category">{{ category }}</li>
-    </ul>
-    <p>Number of categories: {{ catLength }}</p>
+    <h1>Create an event, {{ user.user.name }}</h1>
+
+    <p contenteditable="true" draggable="true" v-on:dragstart="dragme">edit me</p>
+    <button draggable="true" v-on:dragstart="dragme">button</button>
+    <p>Number of categories: {{ categories.length }}</p>
     <p>Selected event: {{ getEventById(2).title }}</p>
 
     <form @submit.prevent="createEvent">
@@ -61,13 +60,16 @@ export default {
     }
     return {
       event: this.createFreshEvent(),
-      times: times,
-      categories: this.$store.state.categories
+      times: times
+      // categories: this.$store.state.categories
     }
   },
   methods: {
+    dragme() {
+      alert('Be alert. This country needs more lerts.')
+    },
     createFreshEvent() {
-      const user = this.$store.state.user
+      const user = this.$store.state.user.user
       const id = Math.floor(Math.random() * 10000)
       return {
         id: id,
@@ -97,7 +99,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getEventById', 'catLength']),
+    ...mapGetters(['getEventById']),
     ...mapState(['user', 'categories'])
   }
 }

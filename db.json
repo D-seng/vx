@@ -121,6 +121,20 @@
       "date": "2019-01-27T04:58:00.000Z",
       "time": "4:00",
       "attendees": []
+    },
+    {
+      "id": 1067,
+      "category": "education",
+      "organizer": {
+        "id": "abc123",
+        "name": "Joe Blow"
+      },
+      "title": "Maths",
+      "description": "Teach kids to do arithmetic",
+      "location": "Buskirk Elementary",
+      "date": "2019-01-25T04:53:00.000Z",
+      "time": "14:00",
+      "attendees": []
     }
   ]
 }
