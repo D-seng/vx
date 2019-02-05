@@ -5,7 +5,7 @@
       draggable="true"
       v-on:dragstart="handleDragStart"
       v-on:dragenter="handleDragEnter"
-      v-on:dragend="handleDragEnd(event.id)"
+      v-on:dragend="handleDragEnd"
     >
       <span class="eyebrow">@{{ event.time }} on {{ event.date }}</span>
       <h4 class="title">{{ event.title }}</h4>
@@ -23,10 +23,10 @@ export default {
     handleDragStart() {
       // alert('start drag')
     },
-    handleDragEnd(eventId) {
-      // var el = document.findElementById(eventId)
-      let b = document.getElementById('bucket')
-      alert(eventId)
+    handleDragEnd() {
+      // let el = document.findElementById(this.event.id)
+      // alert(this.event.id)
+      // alert(ev)
     }
   }
 }

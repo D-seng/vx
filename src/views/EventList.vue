@@ -1,7 +1,7 @@
 <template>
-  <div id="bucket">
+  <div id="bucket" v-on:dragover="handleOnDragOver" v-on:drop="handleOnDrop">
     <h1>Events {{user.user.name}}</h1>
-    <EventCard :id="event.id" v-for="event in event.events" :key="event.id" :event="event"/>
+    <EventCard v-for="event in event.events" :key="event.id" :event="event"/>
     <template v-if="page !=1">
       <router-link :to="{ name: 'event-list', query: { page: page - 1 }}" rel="prev">Previous Page</router-link>
     </template>
@@ -25,7 +25,18 @@ export default {
       page: this.page
     })
   },
-  methods: {},
+  methods: {
+    handleOnDragOver(ev) {
+      ev.preventDefault()
+      ev.dataTransfer.dropEffect = 'move'
+    },
+    handleOnDrop(ev) {
+      ev.preventDefault()
+      // let data = ev.dataTransfer.getData('text/plain')
+      alert(ev)
+      // ev.target.appendChild(document.getElementById(data))
+    }
+  },
   computed: {
     page() {
       return parseInt(this.$route.query.page) || 1
