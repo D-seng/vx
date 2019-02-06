@@ -1,7 +1,14 @@
 <template>
-  <div id="bucket" v-on:dragover="handleOnDragOver" v-on:drop="handleOnDrop">
+  <div>
+    <draggable v-model="exampleList" @start="drag=true" @end="drag=false">
+      <div v-for="text in exampleList" :key="text">{{text}}</div>
+    </draggable>
     <h1>Events {{user.user.name}}</h1>
-    <EventCard v-for="event in event.events" :key="event.id" :event="event"/>
+
+    <draggable v-model="event.events" @start="drag=true" @end="drag=false">
+      <EventCard v-for="event in event.events" :key="event.id" :event="event"/>
+    </draggable>
+
     <template v-if="page !=1">
       <router-link :to="{ name: 'event-list', query: { page: page - 1 }}" rel="prev">Previous Page</router-link>
     </template>
@@ -14,10 +21,17 @@
 <script>
 import EventCard from '@/components/EventCard.vue'
 import { mapState } from 'vuex'
+import draggable from 'vuedraggable'
 
 export default {
   components: {
+    draggable,
     EventCard
+  },
+  data() {
+    return {
+      exampleList: ['item 1', 'item 2', 'item 3', 'item 4']
+    }
   },
   created() {
     this.$store.dispatch('fetchEvents', {
