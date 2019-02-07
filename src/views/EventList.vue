@@ -3,10 +3,15 @@
     <draggable v-model="exampleList" @start="drag=true" @end="drag=false">
       <div v-for="text in exampleList" :key="text">{{text}}</div>
     </draggable>
+
+    <draggable v-model="events" @start="drag=true" @end="drag=false">
+      <div v-for="ev in events" :key="ev.id" :event="ev">{{ev.title}}</div>
+    </draggable>
+
     <h1>Events {{user.user.name}}</h1>
 
-    <draggable v-model="event.events" @start="drag=true" @end="drag=false">
-      <EventCard v-for="event in event.events" :key="event.id" :event="event"/>
+    <draggable v-model="events" @start="drag=true" @end="drag=false">
+      <EventCard v-for="ev in events" :key="ev.id" :event="ev"/>
     </draggable>
 
     <template v-if="page !=1">
@@ -57,6 +62,14 @@ export default {
     },
     eventsTotal() {
       return this.event.eventsTotal
+    },
+    events: {
+      get() {
+        return this.$store.state.event.events
+      },
+      set(ev) {
+        this.$store.commit('SET_EVENTS', ev)
+      }
     },
     ...mapState(['event', 'user'])
   }
