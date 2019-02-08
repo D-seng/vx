@@ -1,17 +1,30 @@
 <template>
-  <router-link class="event-link" :to="{ name: 'event-show', params: { id: event.id } }">
-    <div draggable="true" class="event-card -shadow">
-      <span contenteditable="true" class="eyebrow">@{{ event.time }} on {{ event.date }}</span>
-      <h4 class="title">{{ event.title }}</h4>
+  <div draggable="true" class="event-card -shadow">
+    <span contenteditable="true" class="eyebrow">@{{ event.time }} on {{ event.date }}</span>
+    <h4 class="title">{{ event.title }}</h4>
+    <draggabl v-model="exampleList" @start="drag=true" @end="drag=false">
+      <div v-for="text in exampleList" :key="text">{{text}}</div>
+    </draggabl>
+
+    <router-link class="event-link" :to="{ name: 'event-show', params: { id: event.id } }">
       <BaseIcon name="users">{{ event.attendees.length }} attending</BaseIcon>
-    </div>
-  </router-link>
+    </router-link>
+  </div>
 </template>
 
 <script>
+import draggabl from 'vuedraggable'
 export default {
   props: {
     event: Object
+  },
+  components: {
+    draggabl
+  },
+  data() {
+    return {
+      exampleList: ['item 1', 'item 2', 'item 3', 'item 4']
+    }
   },
   methods: {
     handleDragStart() {
